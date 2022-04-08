@@ -6,4 +6,4 @@
         header('Location:cookie_form.php');
     }
 ?>
-<br><br><a href="./garage.php">Afficher la liste des garages</a>
+<br><br><a href="./first_page_garage.php">Afficher la liste des garages</a>

@@ -57,7 +57,7 @@
             $stmt = $this->dbh->prepare($sql);
             $succeed = $stmt->execute($new_garage);
             if ($succeed == true){
-                header('Location:garage.php?alert=added');
+                header('Location:first_page_garage.php?alert=added');
             }
             return $succeed;
         }
@@ -67,13 +67,12 @@
             $stmt = $this->dbh->prepare($sql);
             $succeed = $stmt->execute();
             if ($succeed){
-                header('Location:garage.php?alert=deleted');
+                header('Location:first_page_garage.php?alert=deleted');
             }
             return $succeed;   
         }
 
         function showSum($id){
-
             $sql = "SELECT name, SUM(car.price)
             FROM car
             WHERE garage_id = $id

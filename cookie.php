@@ -4,7 +4,7 @@
     if ($firstname==null){
         header('Location:cookie_form.php');
     }else{
-        header('Location:garage.php');
+        header('Location:first_page_garage.php');
         require "src/tp_queries.php";
         $garageQueries = new GarageQueries();
         $garageQueries->startConnection();

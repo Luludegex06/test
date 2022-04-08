@@ -11,7 +11,5 @@
     require "src/tp_queries.php";
     $garageQueries = new GarageQueries();
     $garageQueries->startConnection();
-    $garageQueries->showGarage();
-    
-    
+    $garageQueries->showGarage()
 ?>
