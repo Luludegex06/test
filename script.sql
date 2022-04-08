@@ -101,18 +101,18 @@ SELECT * from car;
 
 SELECT * 
 FROM `garage` 
-WHERE name LIKE "%L%"
+WHERE name LIKE "%L%";
 
 SELECT * 
 FROM `car` 
-ORDER BY price DESC
+ORDER BY price DESC;
 
 SELECT name, COUNT(*)
 FROM garage 
 JOIN car
 ON garage.ID
 = car.garage_id
-GROUP BY car.garage_id
+GROUP BY car.garage_id;
 
 SELECT name, SUM(car.price)
 FROM car 
@@ -121,12 +121,12 @@ ON car.garage_id
 = garage.ID
 GROUP BY car.garage_id
 ORDER BY SUM(car.price) DESC
-LIMIT 1
+LIMIT 1;
 
 
 DELETE FROM `car` 
-WHERE model LIKE "E%"
+WHERE model LIKE "E%";
 
-UPDATE car SET  color = 'vert' WHERE price > 200000
+UPDATE car SET  color = 'vert' WHERE price > 200000;
 
-UPDATE car SET  price = 35000 WHERE garage_id = 2
+UPDATE car SET  price = 35000 WHERE garage_id = 2;
