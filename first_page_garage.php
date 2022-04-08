@@ -1,9 +1,4 @@
 <?php
-    require "src/tp_queries.php";
-    $garageQueries = new GarageQueries();
-    $garageQueries->startConnection();
-    $garageQueries->showGarage();
-    
     if (isset($_GET['alert'])){
         $alert = $_GET['alert'];
         if ($alert =='added'){
@@ -13,4 +8,10 @@
         }else if($alert =='deleted')
             echo "Garage supprimé !";
     }
+    require "src/tp_queries.php";
+    $garageQueries = new GarageQueries();
+    $garageQueries->startConnection();
+    $garageQueries->showGarage();
+    
+    
 ?>

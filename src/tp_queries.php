@@ -17,6 +17,7 @@
         }
 
         function showGarage(){
+            echo'<br><br><a href="./garage_add.php">AJOUTER UN GARAGE</a><br><br>';
             $sql = "SELECT * FROM garage";
             $query = $this->dbh->query($sql);
             $values = $query->fetchAll();
@@ -28,8 +29,9 @@
                 echo $garages['city'].' <br>';
                 echo'<a href="garage_car.php?garage_id='.$garages['ID'].'">Afficher les voitures de ce garage </a>';
                 echo'<br><a href="./garage_delete.php?garage_id='.$garages['ID'].'">Supprimer ce garage </a>';
+                echo'<br><a href="./.garage_sum.php?garage_id='.$garages['ID'].'">Prix total des voitures </a>';
             }
-            echo'<br><br><a href="./garage_add.php">Ajouter garage</a><br><br>';
+            
         }
 
         function showCar($id){
@@ -62,14 +64,27 @@
 
         function deleteGarage($id){
             $sql = 'DELETE FROM garage WHERE id ='.$id;
-            
             $stmt = $this->dbh->prepare($sql);
             $succeed = $stmt->execute();
             if ($succeed){
                 header('Location:garage.php?alert=deleted');
             }
-            return $succeed;
-            
+            return $succeed;   
+        }
+
+        function showSum($id){
+
+            $sql = "SELECT name, SUM(car.price)
+            FROM car
+            WHERE garage_id = $id
+            JOIN garage
+            ON car.garage_id
+            = garage.ID
+            GROUP BY car.garage_id
+            ORDER BY SUM(car.price) DESC";
+            $stmt = $this->dbh->prepare($sql);
+            $succeed = $stmt->execute();
+            var_dump($sql);
         }
     }
 ?>
