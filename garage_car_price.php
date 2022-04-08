@@ -3,5 +3,5 @@
     require "src/tp_queries.php";
     $garageQueries = new GarageQueries();
     $garageQueries->startConnection();
-    $garageQueries->showSum($id);
+    $garageQueries->showPrice($id);
 ?>

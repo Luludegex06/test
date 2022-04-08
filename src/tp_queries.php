@@ -27,15 +27,23 @@
                 echo $garages['name'].' <br>';                    
                 echo 'City : '.' ';
                 echo $garages['city'].' <br>';
+                $id = $garages['ID'];
+                $sql_car_count = "SELECT COUNT(*)
+                FROM car
+                WHERE garage_id = $id";
+                $query_car_count = $this->dbh->query($sql_car_count);
+                $count = $query_car_count->fetch();
+                $nb_car = $count[0];
                 echo'<a href="garage_car.php?garage_id='.$garages['ID'].'">Afficher les voitures de ce garage </a>';
                 echo'<br><a href="./garage_delete.php?garage_id='.$garages['ID'].'">Supprimer ce garage </a>';
-                echo'<br><a href="./.garage_sum.php?garage_id='.$garages['ID'].'">Prix total des voitures </a>';
+                echo '<br>Nombre de voitures : '.$nb_car;
+                echo'<br><a href="./garage_car_price.php?garage_id='.$garages['ID'].'">Prix des voitures</a>';
             }
             
         }
 
         function showCar($id){
-            $sql = "SELECT * FROM car WHERE garage_id = $id  ";
+            $sql = "SELECT * FROM car WHERE garage_id = $id ORDER BY price DESC;  ";
             $query = $this->dbh->query($sql);
             $values = $query->fetchAll();
             foreach($values as $car){
@@ -50,6 +58,7 @@
                 echo $car['garage_id'].' ';
                 echo '</p>';
             }
+
         }
 
         function garageForm($new_garage){
@@ -72,18 +81,23 @@
             return $succeed;   
         }
 
-        function showSum($id){
-            $sql = "SELECT name, SUM(car.price)
-            FROM car
-            WHERE garage_id = $id
-            JOIN garage
-            ON car.garage_id
-            = garage.ID
-            GROUP BY car.garage_id
-            ORDER BY SUM(car.price) DESC";
-            $stmt = $this->dbh->prepare($sql);
-            $succeed = $stmt->execute();
-            var_dump($sql);
+        function showPrice($id){
+
+            $sql = "SELECT * FROM car WHERE garage_id = $id ORDER BY price DESC;  ";
+            $query = $this->dbh->query($sql);
+            $car = $query->execute();
+            foreach($car as $price){
+                echo '<p>';
+                echo ' Model: '.' ';
+                echo $car['model'].' ';                    
+                echo 'Color : '.' ';
+                echo $car['color'].' ';
+                echo 'Price : '.' ';
+                echo $car['price'].' ';
+                echo 'Garage ID : '.' ';
+                echo $car['garage_id'].' ';
+                echo '</p>';
+            }
         }
     }
 ?>
